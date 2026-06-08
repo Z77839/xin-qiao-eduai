@@ -5,8 +5,8 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const API_KEY = process.env.OPENAI_API_KEY;
-const API_URL = 'https://api.openai.com/v1/chat/completions';
+const API_KEY = process.env.AGNES_API_KEY;
+const API_URL = 'https://apihub.agnes-ai.com/v1/chat/completions';
 
 if (!API_KEY) {
   console.warn('⚠️ 未检测到 OPENAI_API_KEY，AI 对话功能暂时不可用');
@@ -40,7 +40,7 @@ app.post('/api/chat', async (req, res) => {
         'Authorization': `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'agnes-2.0-flash',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: message },
@@ -69,5 +69,5 @@ app.post('/api/chat', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`\n✅ 心桥EduAI 后端服务已启动`);
   console.log(`📍 http://localhost:${PORT}`);
-  console.log(`🔑 API: OpenAI GPT-3.5-turbo\n`);
+  console.log(`🔑 API: Agnes AI agnes-2.0-flash（免费多模态模型）\n`);
 });
