@@ -3,14 +3,13 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const API_KEY = process.env.OPENAI_API_KEY;
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
 if (!API_KEY) {
- console.error('❌ 缺少环境变量 OPENAI_API_KEY，请在 Render 控制台设置');
-  process.exit(1);
+  console.warn('⚠️ 未检测到 OPENAI_API_KEY，AI 对话功能暂时不可用');
 }
 
 app.use(cors());
